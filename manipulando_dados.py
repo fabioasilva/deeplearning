@@ -57,6 +57,9 @@ hidden = tf.sigmoid(tf.add(tf.matmul(X, w1),b1)) #camada escondida
 y_pred = tf.sigmoid(tf.add(tf.matmul(hidden,w2),b2)) #camada de saída
 
 loss = tf.reduce_mean(tf.squared_difference(y_pred, Y))
+# L2 Regularization with beta=0.01
+regularizers = tf.nn.l2_loss(w1) + tf.nn.l2_loss(w2)
+loss = tf.reduce_mean(loss + 0.01 * regularizers)
 
 optimizer = tf.train.AdamOptimizer(0.1).minimize(loss)
 
